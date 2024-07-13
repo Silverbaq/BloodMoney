@@ -6,7 +6,7 @@ This is a learning project, of making my own cryptocurrency.
   - [ ] Mining
   - [ ] Distributed networking (LAN)
   - [ ] Decentralized
-  - [ ] Sync between instances 
+  - [x] Sync between instances 
 - [ ] Wallet
   - [ ] Transactions
 
