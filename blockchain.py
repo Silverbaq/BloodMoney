@@ -79,13 +79,16 @@ class Blockchain:
         self.trigger_resolve()  # Trigger resolution on other nodes
         return block
 
-
-
     def new_transaction(self, sender, recipient, amount, signature=None):
         if sender != "0":  # Skip verification for mining rewards
             wallet = Wallet()
-            if not wallet.verify_transaction({'sender': sender, 'recipient': recipient, 'amount': amount}, signature, sender):
+            if not wallet.verify_transaction({'sender': sender, 'recipient': recipient, 'amount': amount}, signature,
+                                             sender):
                 return 'Invalid transaction signature', 400
+
+            # Check if the sender has enough balance
+            if self.get_balance(sender) < int(amount):
+                return 'Insufficient balance', 400
 
         self.current_transactions.append({
             'sender': sender,
@@ -103,6 +106,14 @@ class Blockchain:
                     balance += int(transaction['amount'])
                 if transaction['sender'] == address:
                     balance -= int(transaction['amount'])
+
+        # Include pending transactions
+        for transaction in self.current_transactions:
+            if transaction['recipient'] == address:
+                balance += int(transaction['amount'])
+            if transaction['sender'] == address:
+                balance -= int(transaction['amount'])
+
         return balance
 
     @staticmethod
