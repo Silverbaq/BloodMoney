@@ -13,6 +13,12 @@ This is a learning project, of making my own cryptocurrency.
   - [x] Balance
   - [X] Mining reward
 
+### TODO
+* Sync transactions from every note when adding a new block
+* Add time stamp and message to transaction data
+* Improve Decentralized network 
+
+
 ## How to run
 
 ### Start instances
