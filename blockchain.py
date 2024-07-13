@@ -6,6 +6,9 @@ from urllib.parse import urlparse
 import requests
 import threading
 
+from wallet import Wallet
+
+
 class Blockchain:
     def __init__(self):
         self.chain = []
@@ -76,13 +79,31 @@ class Blockchain:
         self.trigger_resolve()  # Trigger resolution on other nodes
         return block
 
-    def new_transaction(self, sender, recipient, amount):
+
+
+    def new_transaction(self, sender, recipient, amount, signature=None):
+        if sender != "0":  # Skip verification for mining rewards
+            wallet = Wallet()
+            if not wallet.verify_transaction({'sender': sender, 'recipient': recipient, 'amount': amount}, signature, sender):
+                return 'Invalid transaction signature', 400
+
         self.current_transactions.append({
             'sender': sender,
             'recipient': recipient,
             'amount': amount,
         })
+
         return self.last_block['index'] + 1
+
+    def get_balance(self, address):
+        balance = 0
+        for block in self.chain:
+            for transaction in block['transactions']:
+                if transaction['recipient'] == address:
+                    balance += int(transaction['amount'])
+                if transaction['sender'] == address:
+                    balance -= int(transaction['amount'])
+        return balance
 
     @staticmethod
     def hash(block):
