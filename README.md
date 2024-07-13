@@ -4,9 +4,10 @@ This is a learning project, of making my own cryptocurrency.
 ## Features
 - [ ] Blockchain
   - [x] Mining
-  - [ ] Distributed networking (LAN)
+  - [x] Distributed networking (LAN)
+  - [ ] Distributed networking (Not just LAN)
   - [x] Decentralized
-  - [x] Sync between instances 
+  - [x] Sync between instances
 - [x] Wallet
   - [x] Transactions
   - [x] Balance
