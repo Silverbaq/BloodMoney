@@ -6,8 +6,8 @@ This is a learning project, of making my own cryptocurrency.
   - [x] Mining
   - [x] Distributed networking (LAN)
   - [ ] Distributed networking (Not just LAN)
-  - [x] Decentralized
-  - [x] Sync between instances
+  - [x] Decentralized (Not working that well atm)
+  - [ ] Sync between instances (Not working that well atm)
 - [x] Wallet
   - [x] Transactions
   - [x] Balance

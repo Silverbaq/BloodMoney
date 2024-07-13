@@ -152,13 +152,6 @@ def create_transaction():
 
     index = blockchain.new_transaction(transaction['sender'], transaction['recipient'], transaction['amount'], transaction['signature'])
 
-    last_block = blockchain.last_block
-    last_proof = last_block['proof']
-    proof = blockchain.proof_of_work(last_proof)
-
-    previous_hash = blockchain.hash(last_block)
-    block = blockchain.new_block(proof, previous_hash)
-
     response = {'message': f'Transaction will be added to Block {index}'}
     return jsonify(response), 201
 
